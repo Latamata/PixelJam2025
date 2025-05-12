@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n54c6i6senkm"
-path="res://.godot/imported/coin.png-7e710de472b75b3653c3283ef5153eb4.ctex"
+uid="uid://4i8fsh7jehbf"
+path="res://.godot/imported/boat.png-ee58a95610b67d7993b39f0358510a88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://coin.png"
-dest_files=["res://.godot/imported/coin.png-7e710de472b75b3653c3283ef5153eb4.ctex"]
+source_file="res://assets/boat.png"
+dest_files=["res://.godot/imported/boat.png-ee58a95610b67d7993b39f0358510a88.ctex"]
 
 [params]
 
