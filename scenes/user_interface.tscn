@@ -4,15 +4,24 @@
 
 [node name="user_interface" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_syvep")
 
+[node name="helpers" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 626.0
+offset_top = 12.0
+offset_right = 726.0
+offset_bottom = 52.0
+
+[node name="Button" type="Button" parent="helpers"]
+layout_mode = 0
+offset_right = 19.0
+offset_bottom = 9.0
+focus_mode = 0
+text = "Sould Frenzy"
+
 [node name="Control" type="Control" parent="."]
-layout_direction = 2
 anchors_preset = 0
 offset_right = 89.0
 offset_bottom = 65.0
@@ -41,5 +50,6 @@ offset_right = 29.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "50
-"
+text = "0"
+
+[connection signal="button_down" from="helpers/Button" to="." method="_on_button_button_down"]

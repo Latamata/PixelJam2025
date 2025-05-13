@@ -5,7 +5,7 @@ extends Node2D
 @onready var soul_scene = preload("res://scenes/soul.tscn")
 @onready var player: CharacterBody2D = $Player
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var sould_group_node: Node2D = $sould_group_node
+@onready var soul_group_node: Node2D = $soul_group_node
 
 #-------FUNCTIONS----------
 func _ready() -> void:
@@ -34,13 +34,30 @@ func spawn_soul():
 	var top_limit = cam_pos.y - screen_size.y / 2 + screen_size.y * 0.25
 	var bottom_limit = cam_pos.y + screen_size.y / 2
 	var spawn_y = randf_range(top_limit, bottom_limit)
-	#print(screen_size)
+	if evil_water_off:
+		soul.attacking = true
+	soul.boat = player
 	soul.end_of_the_road = screen_size.x
 	soul.global_position = Vector2(spawn_x, spawn_y)
-	sould_group_node.add_child(soul)
+	soul_group_node.add_child(soul)
 
 func _UI_signal():
 	$user_interface.update_UI()
 
 func _on_timer_timeout() -> void:
 	spawn_soul()
+
+var evil_water_off = false
+func _on_user_interface_change_color_water() -> void:
+
+	if !evil_water_off:
+		$water.material.set_shader_parameter("wave_color", Color(1.0, 0.5, 0.0))
+		evil_water_off = true
+		for entity in soul_group_node.get_children():  # Include all entities
+			entity.attacking = true
+	else:
+		$water.material.set_shader_parameter("wave_color", Color(0.0, 0.8, 1.0))
+		evil_water_off = false
+		for entity in soul_group_node.get_children():  # Include all entities
+			entity.attacking = false
+#shader_parameter/wave_color

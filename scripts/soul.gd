@@ -1,23 +1,32 @@
-extends Area2D
+extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@export var speed := 50  # pixels per second
+@export var SPEED := 50  # pixels per second
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
+var boat 
+var attacking = false 
 var end_of_the_road 
 
-func _ready():
-	if sprite_2d.material:
-		sprite_2d.material = sprite_2d.material.duplicate()
-
 func _process(delta):
-	position.x += speed * delta
+	
 	#print(position)
 	if position.x >= end_of_the_road:
 		queue_free()
+	if attacking:
+		var target = boat
+		var to_target = (target.global_position - global_position).normalized()
+		velocity = to_target * SPEED
+		rotation = to_target.angle()
+		sprite_2d.flip_v = to_target.x < 0
 
-func _on_body_entered(body: Node2D) -> void:
-	body.queue_free()
+		move_and_slide()
+	else:
+		sprite_2d.flip_v = false
+		rotation = 0.0
+		position.x += SPEED * delta
+
+func rise_from_dead() -> void:
 	animation_player.play('rise_up')
 	Globals.add_souls(1)
 
