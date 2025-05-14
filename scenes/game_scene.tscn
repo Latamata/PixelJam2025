@@ -48,3 +48,4 @@ color = Color(0, 0, 0, 0.105882)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="change_color_water" from="user_interface" to="." method="_on_user_interface_change_color_water"]
+[connection signal="sense_souls" from="user_interface" to="." method="_on_user_interface_sense_souls"]

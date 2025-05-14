@@ -22,24 +22,33 @@ func toss_a_coin():
 	
 func spawn_soul():
 	var soul = soul_scene.instantiate()
-	
+
 	# Get camera boundaries
 	var cam_pos = camera_2d.global_position
 	var screen_size = get_viewport().get_visible_rect().size
-	
-	# Spawn just off the left edge
-	var spawn_x = cam_pos.x - screen_size.x / 2 - 32  # 32 = padding, adjust if needed
 
-	# Adjust vertical spawn range to cut off the top 25% (you can tweak the 0.25)
+	# Spawn just off the left edge
+	var spawn_x = cam_pos.x - screen_size.x / 2 - 32  # 32 = padding
+
+	# Spawn somewhere between 25% and 100% of screen height
 	var top_limit = cam_pos.y - screen_size.y / 2 + screen_size.y * 0.25
 	var bottom_limit = cam_pos.y + screen_size.y / 2
 	var spawn_y = randf_range(top_limit, bottom_limit)
+
+	# Setup soul
 	if evil_water_off:
 		soul.attacking = true
+
+	# 🎲 Random chance to be evil — 20% chance (adjust as needed)
+	if randf() < 0.2:
+		soul.evil_soul = true
+
 	soul.boat = player
 	soul.end_of_the_road = screen_size.x
 	soul.global_position = Vector2(spawn_x, spawn_y)
+
 	soul_group_node.add_child(soul)
+
 
 func _UI_signal():
 	$user_interface.update_UI()
@@ -61,3 +70,7 @@ func _on_user_interface_change_color_water() -> void:
 		for entity in soul_group_node.get_children():  # Include all entities
 			entity.attacking = false
 #shader_parameter/wave_color
+
+
+func _on_user_interface_sense_souls() -> void:
+	player.soul_sense()
