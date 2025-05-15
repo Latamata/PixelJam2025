@@ -14,21 +14,23 @@ func _ready() -> void:
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		toss_a_coin()
+@onready var water_ovelay: ColorRect = $water_ovelay
 
 func toss_a_coin():
 	var coin = coin_scene.instantiate()
 	coin.position = player.position  # Spawns at current node's position (e.g. boat)
 	get_tree().current_scene.add_child(coin)
-	
+
 func spawn_soul():
 	var soul = soul_scene.instantiate()
 
 	# Get camera boundaries
 	var cam_pos = camera_2d.global_position
 	var screen_size = get_viewport().get_visible_rect().size
+	# Spawn just to the left of the water overlay
+	var overlay_pos = water_ovelay.get_global_position()
+	var spawn_x = overlay_pos.x - 32  # Adjust padding as needed
 
-	# Spawn just off the left edge
-	var spawn_x = cam_pos.x - screen_size.x / 2 - 32  # 32 = padding
 
 	# Spawn somewhere between 25% and 100% of screen height
 	var top_limit = cam_pos.y - screen_size.y / 2 + screen_size.y * 0.25
@@ -40,8 +42,9 @@ func spawn_soul():
 		soul.attacking = true
 
 	# 🎲 Random chance to be evil — 20% chance (adjust as needed)
-	if randf() < 0.2:
+	if randf() < 0.2: 
 		soul.evil_soul = true
+	soul.connect("evil_spirit_triggered", Callable(self, "_on_soul_evil_spirit_triggered"))
 
 	soul.boat = player
 	soul.end_of_the_road = screen_size.x
@@ -62,6 +65,7 @@ func _on_user_interface_change_color_water() -> void:
 	if !evil_water_off:
 		$water.material.set_shader_parameter("wave_color", Color(1.0, 0.5, 0.0))
 		evil_water_off = true
+		$frenzy_timestop.start()
 		for entity in soul_group_node.get_children():  # Include all entities
 			entity.attacking = true
 	else:
@@ -74,3 +78,12 @@ func _on_user_interface_change_color_water() -> void:
 
 func _on_user_interface_sense_souls() -> void:
 	player.soul_sense()
+
+
+func _on_soul_evil_spirit_triggered() -> void:
+	if !evil_water_off:
+		_on_user_interface_change_color_water()
+
+
+func _on_frenzy_timestop_timeout() -> void:
+	_on_user_interface_change_color_water()

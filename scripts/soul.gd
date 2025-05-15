@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal evil_spirit_triggered
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var SPEED := 50  # pixels per second
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -27,10 +29,10 @@ func _process(delta):
 
 func rise_from_dead() -> void:
 	rising = true
-	#if evil_soul:
-		#print('running')
-		#point_light_2d.color = Color(1, 0, 0)  
-	animation_player.play('rise_up')
+	if evil_soul: 
+		animation_player.play('evil_rise')
+	else:
+		animation_player.play('rise_up')
 	Globals.add_souls(1)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -39,7 +41,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		point_light_2d.color = Color(1, 1, 1)       # White, or whatever your default is
 		point_light_2d.energy = 0.0                # Or your default energy value
 	elif anim_name == "rise_up":
-		print(point_light_2d.color)
+		queue_free()
+	elif anim_name == "evil_rise":
+		emit_signal('evil_spirit_triggered')
 		queue_free()
 
 func sensed_out():

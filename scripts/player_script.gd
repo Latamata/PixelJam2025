@@ -4,11 +4,6 @@ extends CharacterBody2D
 @onready var sense_circle: Area2D = $sense_circle
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-func _ready() -> void:
-	var shape = $sense_circle/CollisionShape2D.shape
-	if shape is CircleShape2D:
-		shape.radius = 5.0
-
 
 func _process(_delta):
 	var direction = 0.0

@@ -46,6 +46,11 @@ color = Color(0, 0, 0, 0.105882)
 
 [node name="user_interface" parent="." instance=ExtResource("2_y3j0m")]
 
+[node name="frenzy_timestop" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="change_color_water" from="user_interface" to="." method="_on_user_interface_change_color_water"]
 [connection signal="sense_souls" from="user_interface" to="." method="_on_user_interface_sense_souls"]
+[connection signal="timeout" from="frenzy_timestop" to="." method="_on_frenzy_timestop_timeout"]
