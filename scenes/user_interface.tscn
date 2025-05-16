@@ -30,6 +30,15 @@ offset_bottom = 30.0
 focus_mode = 0
 text = "Soul Sensew"
 
+[node name="sense_cooldown" type="ProgressBar" parent="helpers"]
+layout_mode = 0
+offset_left = -163.0
+offset_top = 1.0
+offset_right = -20.0
+offset_bottom = 28.0
+max_value = 5.0
+show_percentage = false
+
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 89.0

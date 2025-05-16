@@ -77,7 +77,9 @@ func _on_user_interface_change_color_water() -> void:
 
 
 func _on_user_interface_sense_souls() -> void:
-	player.soul_sense()
+	#print(player.sense_on_cooldown)
+	if !player.sense_on_cooldown:
+		player.soul_sense()
 
 
 func _on_soul_evil_spirit_triggered() -> void:
@@ -87,3 +89,7 @@ func _on_soul_evil_spirit_triggered() -> void:
 
 func _on_frenzy_timestop_timeout() -> void:
 	_on_user_interface_change_color_water()
+
+
+func _on_player_cooldown_updated(progress: float) -> void:
+	$user_interface.set_soul_reload_UI(progress)

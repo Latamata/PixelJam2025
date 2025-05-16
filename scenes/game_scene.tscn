@@ -50,6 +50,7 @@ color = Color(0, 0, 0, 0.105882)
 wait_time = 5.0
 one_shot = true
 
+[connection signal="cooldown_updated" from="Player" to="." method="_on_player_cooldown_updated"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="change_color_water" from="user_interface" to="." method="_on_user_interface_change_color_water"]
 [connection signal="sense_souls" from="user_interface" to="." method="_on_user_interface_sense_souls"]

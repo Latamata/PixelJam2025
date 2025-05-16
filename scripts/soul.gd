@@ -15,17 +15,23 @@ var end_of_the_road
 func _process(delta):
 	if position.x >= end_of_the_road:
 		queue_free()
-	if attacking && !rising:
+
+	if attacking and !rising:
 		var target = boat
 		var to_target = (target.global_position - global_position).normalized()
 		velocity = to_target * SPEED
 		rotation = to_target.angle()
 		sprite_2d.flip_v = to_target.x < 0
 		move_and_slide()
+
+		# Clamp Y so it doesn’t rise above the water
+		var water_y_limit = get_tree().current_scene.get_node("water_ovelay").global_position.y
+		global_position.y = max(global_position.y, water_y_limit)
 	else:
 		sprite_2d.flip_v = false
 		rotation = 0.0
 		position.x += SPEED * delta
+
 
 func rise_from_dead() -> void:
 	rising = true
