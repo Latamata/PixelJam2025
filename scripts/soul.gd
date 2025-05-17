@@ -32,14 +32,18 @@ func _process(delta):
 		rotation = 0.0
 		position.x += SPEED * delta
 
-
 func rise_from_dead() -> void:
 	rising = true
-	if evil_soul: 
+	if evil_soul:
 		animation_player.play('evil_rise')
 	else:
 		animation_player.play('rise_up')
-	Globals.add_souls(1)
+
+	if not attacking:
+		Globals.add_souls(1)
+	else:
+		Globals.add_souls(-1)
+	#print(Globals.soul_count)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "evil_soul":
