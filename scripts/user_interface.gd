@@ -17,6 +17,3 @@ func _on_soul_sense_button_down() -> void:
 
 func set_soul_reload_UI(progress):
 	sense_cooldown.value = sense_cooldown.max_value - progress
-
-	#sense_cooldown.value = progress 
-	#print(sense_cooldown.value)

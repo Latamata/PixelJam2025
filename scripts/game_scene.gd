@@ -81,15 +81,27 @@ func _on_user_interface_sense_souls() -> void:
 	if !player.sense_on_cooldown:
 		player.soul_sense()
 
+var frenzy_on_cooldown = false
 
 func _on_soul_evil_spirit_triggered() -> void:
-	if !evil_water_off:
+	#print(frenzy_on_cooldown)
+	if !evil_water_off and !frenzy_on_cooldown:
+		
 		_on_user_interface_change_color_water()
-
+		
+		
+		
 
 func _on_frenzy_timestop_timeout() -> void:
 	_on_user_interface_change_color_water()
-
+	frenzy_on_cooldown = true
+	$frenzy_balanceCD.start()  # Start cooldown timer
 
 func _on_player_cooldown_updated(progress: float) -> void:
 	$user_interface.set_soul_reload_UI(progress)
+	
+
+func _on_frenzy_balance_cd_timeout() -> void:
+	print('running')
+	if frenzy_on_cooldown:
+		frenzy_on_cooldown = false

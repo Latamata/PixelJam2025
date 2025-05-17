@@ -50,8 +50,13 @@ color = Color(0, 0, 0, 0.105882)
 wait_time = 5.0
 one_shot = true
 
+[node name="frenzy_balanceCD" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="cooldown_updated" from="Player" to="." method="_on_player_cooldown_updated"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="change_color_water" from="user_interface" to="." method="_on_user_interface_change_color_water"]
 [connection signal="sense_souls" from="user_interface" to="." method="_on_user_interface_sense_souls"]
 [connection signal="timeout" from="frenzy_timestop" to="." method="_on_frenzy_timestop_timeout"]
+[connection signal="timeout" from="frenzy_balanceCD" to="." method="_on_frenzy_balance_cd_timeout"]
