@@ -19,7 +19,7 @@ layout_mode = 0
 offset_right = 19.0
 offset_bottom = 9.0
 focus_mode = 0
-text = "Soul Frenzy"
+text = "Info"
 
 [node name="soul_sense" type="Button" parent="helpers"]
 layout_mode = 0
@@ -28,7 +28,7 @@ offset_top = -1.0
 offset_right = 206.0
 offset_bottom = 30.0
 focus_mode = 0
-text = "Soul Sensew"
+text = "Soul Sense"
 
 [node name="sense_cooldown" type="ProgressBar" parent="helpers"]
 layout_mode = 0
@@ -36,7 +36,7 @@ offset_left = -163.0
 offset_top = 1.0
 offset_right = -20.0
 offset_bottom = 28.0
-max_value = 5.0
+max_value = 10.0
 show_percentage = false
 
 [node name="Control" type="Control" parent="."]
@@ -70,5 +70,53 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0"
 
+[node name="tuts" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 284.0
+offset_top = 91.0
+offset_right = 759.0
+offset_bottom = 440.0
+
+[node name="ColorRect" type="ColorRect" parent="tuts"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.359069, 0.359069, 0.359069, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="tuts"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 471.0
+offset_bottom = 349.0
+text = "A / D — Move the boat left and right
+
+Spacebar — Drop coins into the river
+
+Click the “sense” button — Reveal if a ghost is evil or protect yourself during a frenzy
+
+Goal — Hit '50' souls in the river with coins to collect them
+
+Frenzy Mode — Be careful! During frenzy, souls will try to steal from you
+
+Avoid touching souls during frenzy, or they’ll take a soul from your count!"
+
+[node name="exit_tut" type="Button" parent="tuts"]
+process_mode = 2
+layout_mode = 0
+offset_left = 307.0
+offset_top = 318.0
+offset_right = 435.0
+offset_bottom = 385.0
+focus_mode = 0
+text = "Continue...."
+flat = true
+
 [connection signal="button_down" from="helpers/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="helpers/soul_sense" to="." method="_on_soul_sense_button_down"]
+[connection signal="button_down" from="tuts/exit_tut" to="." method="_on_exit_tut_button_down"]

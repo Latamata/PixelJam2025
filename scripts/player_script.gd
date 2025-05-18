@@ -32,7 +32,7 @@ func _on_sense_circle_body_entered(body: Node2D) -> void:
 
 func soul_sense():
 	sense_on_cooldown = true
-	cooldown_counter = 5.0
+	cooldown_counter = 10.0
 	$sense_timer.start()
 	animation_player.play("circle_sense")
 

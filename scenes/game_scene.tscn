@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfe12plxxaikc"]
+[gd_scene load_steps=7 format=3 uid="uid://bfe12plxxaikc"]
 
 [ext_resource type="Script" uid="uid://dp71v1n2ewr2m" path="res://scripts/game_scene.gd" id="1_ycayy"]
 [ext_resource type="PackedScene" uid="uid://4gwbm386kfg2" path="res://scenes/Player.tscn" id="2_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://cw1cevttxifhr" path="res://scenes/user_interface.tscn" id="2_y3j0m"]
 [ext_resource type="Shader" uid="uid://p4102l0ls83o" path="res://scripts/water.gdshader" id="3_y3j0m"]
+[ext_resource type="AudioStream" uid="uid://bjsqh0wrk5tcf" path="res://assets/coin-flip-88793.mp3" id="5_y3j0m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mixcd"]
 shader = ExtResource("3_y3j0m")
@@ -54,9 +55,11 @@ one_shot = true
 wait_time = 4.0
 one_shot = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_y3j0m")
+
 [connection signal="cooldown_updated" from="Player" to="." method="_on_player_cooldown_updated"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="change_color_water" from="user_interface" to="." method="_on_user_interface_change_color_water"]
 [connection signal="sense_souls" from="user_interface" to="." method="_on_user_interface_sense_souls"]
 [connection signal="timeout" from="frenzy_timestop" to="." method="_on_frenzy_timestop_timeout"]
 [connection signal="timeout" from="frenzy_balanceCD" to="." method="_on_frenzy_balance_cd_timeout"]

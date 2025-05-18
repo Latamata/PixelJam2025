@@ -6,7 +6,8 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var soul_group_node: Node2D = $soul_group_node
-
+@onready var water_ovelay: ColorRect = $water_ovelay
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 #-------FUNCTIONS----------
 func _ready() -> void:
 	Globals.connect( "UI_signal", _UI_signal )
@@ -14,12 +15,23 @@ func _ready() -> void:
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		toss_a_coin()
-@onready var water_ovelay: ColorRect = $water_ovelay
+
+
+var can_toss_coin := true
 
 func toss_a_coin():
+	if not can_toss_coin:
+		return
+
+	can_toss_coin = false
+
+	audio_stream_player_2d.play()
 	var coin = coin_scene.instantiate()
-	coin.position = player.position  # Spawns at current node's position (e.g. boat)
+	coin.position = player.position
 	get_tree().current_scene.add_child(coin)
+
+	await get_tree().create_timer(1.5).timeout
+	can_toss_coin = true
 
 func spawn_soul():
 	var soul = soul_scene.instantiate()
@@ -73,8 +85,6 @@ func _on_user_interface_change_color_water() -> void:
 		evil_water_off = false
 		for entity in soul_group_node.get_children():  # Include all entities
 			entity.attacking = false
-#shader_parameter/wave_color
-
 
 func _on_user_interface_sense_souls() -> void:
 	#print(player.sense_on_cooldown)
@@ -97,6 +107,6 @@ func _on_player_cooldown_updated(progress: float) -> void:
 	$user_interface.set_soul_reload_UI(progress)
 
 func _on_frenzy_balance_cd_timeout() -> void:
-	print('running')
+	#print('running')
 	if frenzy_on_cooldown:
 		frenzy_on_cooldown = false
