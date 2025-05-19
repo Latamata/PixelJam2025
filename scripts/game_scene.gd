@@ -41,7 +41,7 @@ func spawn_soul():
 	
 	# X position: just left of the water overlay
 	var overlay_pos = water_ovelay.get_global_position()
-	var spawn_x = overlay_pos.x - 32
+	var spawn_x = overlay_pos.x - 75
 
 	# Define vertical spawn limits more precisely
 	var soul_height = 32  # Approximate half of the soul sprite's height (adjust if needed)
@@ -105,3 +105,7 @@ func _on_frenzy_balance_cd_timeout() -> void:
 	#print('running')
 	if frenzy_on_cooldown:
 		frenzy_on_cooldown = false
+
+
+func _on_ambience_finished() -> void:
+	$ambience.play()

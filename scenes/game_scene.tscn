@@ -65,9 +65,9 @@ stream = ExtResource("5_y3j0m")
 [node name="ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_kk2rg")
 autoplay = true
-parameters/looping = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="sense_souls" from="user_interface" to="." method="_on_user_interface_sense_souls"]
 [connection signal="timeout" from="frenzy_timestop" to="." method="_on_frenzy_timestop_timeout"]
 [connection signal="timeout" from="frenzy_balanceCD" to="." method="_on_frenzy_balance_cd_timeout"]
+[connection signal="finished" from="ambience" to="." method="_on_ambience_finished"]
