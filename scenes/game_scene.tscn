@@ -57,7 +57,6 @@ wait_time = 5.0
 one_shot = true
 
 [node name="frenzy_balanceCD" type="Timer" parent="."]
-wait_time = 4.0
 one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
