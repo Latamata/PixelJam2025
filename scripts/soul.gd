@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-signal evil_spirit_triggered
+signal evil_spirit_triggered(is_evil: bool)
+
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var SPEED := 50  # pixels per second
@@ -52,8 +53,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		point_light_2d.energy = 0.0                # Or your default energy value
 	elif anim_name == "rise_up":
 		queue_free()
+		emit_signal('evil_spirit_triggered', false)
 	elif anim_name == "evil_rise":
-		emit_signal('evil_spirit_triggered')
+		emit_signal('evil_spirit_triggered', true)
 		queue_free()
 
 func sensed_out():

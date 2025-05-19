@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec3 wave_color = vec3(0.0, 0.8, 1.0); 
+uniform vec3 wave_color = vec3(0.0, 0.8, 1.0);
 uniform float wave_speed = 1.0; // Speed of the waves
 uniform float wave_amplitude = 10.0; // Height of the waves
 uniform float wave_frequency = 5.0; // Frequency of the waves

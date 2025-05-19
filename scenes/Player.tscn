@@ -180,8 +180,6 @@ collision_mask = 2
 position = Vector2(-8.5, 25.5)
 shape = SubResource("RectangleShape2D_3li8b")
 
-[node name="sense_timer" type="Timer" parent="."]
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-9, -9)
 scale = Vector2(0.203125, 49)
@@ -190,4 +188,3 @@ texture = SubResource("GradientTexture1D_qu4a1")
 [connection signal="body_entered" from="sense_circle" to="." method="_on_sense_circle_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="sense_timer" to="." method="_on_sense_timer_timeout"]

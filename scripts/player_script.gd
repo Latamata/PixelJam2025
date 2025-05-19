@@ -1,11 +1,8 @@
 extends CharacterBody2D
 
-signal cooldown_updated(progress : float)
-
 @export var speed := 100.0  # You can adjust this to your needs
 @onready var sense_circle: Area2D = $sense_circle
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-var sense_on_cooldown = false
 var direction := 0.0  # Make direction a member variable
 var max_cooldown = 5.0
 var cooldown_counter = 0
@@ -31,9 +28,6 @@ func _on_sense_circle_body_entered(body: Node2D) -> void:
 		body.attacking = false
 
 func soul_sense():
-	sense_on_cooldown = true
-	cooldown_counter = 10.0
-	$sense_timer.start()
 	animation_player.play("circle_sense")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -47,9 +41,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.rise_from_dead() 
 
 func _on_sense_timer_timeout():
-	cooldown_counter -= 1.0
 	emit_signal("cooldown_updated", cooldown_counter )
-	if cooldown_counter <= 0:
-		sense_on_cooldown = false
-		print("Cooldown finished!")
-		$sense_timer.stop()

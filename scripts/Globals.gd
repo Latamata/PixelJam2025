@@ -1,7 +1,7 @@
 extends Node
 
 signal UI_signal
-var soul_count = 1
+var soul_count = 0
 const SOUL_LIMIT = 50  # set your desired limit
 
 func add_souls(soul_amount):

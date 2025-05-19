@@ -3,40 +3,52 @@
 [ext_resource type="Script" uid="uid://b4dkhdooyupv4" path="res://scripts/user_interface.gd" id="1_syvep"]
 
 [node name="user_interface" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_syvep")
 
 [node name="helpers" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 626.0
-offset_top = 12.0
-offset_right = 726.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1152.0
 offset_bottom = 52.0
 
 [node name="Button" type="Button" parent="helpers"]
-layout_mode = 0
-offset_right = 19.0
-offset_bottom = 9.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -39.0
+offset_bottom = 31.0
+grow_horizontal = 0
 focus_mode = 0
 text = "Info"
 
 [node name="soul_sense" type="Button" parent="helpers"]
-layout_mode = 0
-offset_left = 109.0
-offset_top = -1.0
-offset_right = 206.0
-offset_bottom = 30.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 77.0
+offset_top = -3.0
+offset_right = 174.0
+offset_bottom = 28.0
+grow_horizontal = 2
 focus_mode = 0
 text = "Soul Sense"
 
 [node name="sense_cooldown" type="ProgressBar" parent="helpers"]
-layout_mode = 0
-offset_left = -163.0
-offset_top = 1.0
-offset_right = -20.0
-offset_bottom = 28.0
-max_value = 10.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.5
+offset_right = 71.5
+offset_bottom = 27.0
+grow_horizontal = 2
+max_value = 3.0
 show_percentage = false
 
 [node name="Control" type="Control" parent="."]
@@ -71,7 +83,6 @@ grow_vertical = 2
 text = "0"
 
 [node name="tuts" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_left = 284.0
 offset_top = 91.0
@@ -83,7 +94,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 51.0
+offset_left = -10.0
+offset_top = -4.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.359069, 0.359069, 0.359069, 1)
@@ -94,17 +107,16 @@ offset_left = 1.0
 offset_top = 4.0
 offset_right = 471.0
 offset_bottom = 349.0
-text = "A / D — Move the boat left and right
+text = "A / D — Move the boat left and right  
+Spacebar — Drop coins into the river  
+Click the “Sense” button — Reveal if a ghost is evil or protect yourself during a frenzy  
+(Requires collecting 3 souls to activate)
 
-Spacebar — Drop coins into the river
+Goal — Hit 50 souls in the river with coins to collect them  
 
-Click the “sense” button — Reveal if a ghost is evil or protect yourself during a frenzy
-
-Goal — Hit '50' souls in the river with coins to collect them
-
-Frenzy Mode — Be careful! During frenzy, souls will try to steal from you
-
-Avoid touching souls during frenzy, or they’ll take a soul from your count!"
+Frenzy Mode — Be careful! Evil souls will trigger a frenzy when hit  
+Avoid touching souls during frenzy, or they’ll take a soul from your count!
+"
 
 [node name="exit_tut" type="Button" parent="tuts"]
 process_mode = 2
@@ -117,6 +129,18 @@ focus_mode = 0
 text = "Continue...."
 flat = true
 
+[node name="close_tut" type="Button" parent="tuts"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "x"
+
 [connection signal="button_down" from="helpers/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="helpers/soul_sense" to="." method="_on_soul_sense_button_down"]
 [connection signal="button_down" from="tuts/exit_tut" to="." method="_on_exit_tut_button_down"]
+[connection signal="button_down" from="tuts/close_tut" to="." method="_on_close_tut_button_down"]
