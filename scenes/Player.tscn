@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://4gwbm386kfg2"]
+[gd_scene load_steps=14 format=3 uid="uid://4gwbm386kfg2"]
 
 [ext_resource type="Script" uid="uid://bqdxdwovveq63" path="res://scripts/player_script.gd" id="1_xhfnw"]
 [ext_resource type="Texture2D" uid="uid://4i8fsh7jehbf" path="res://assets/boat.png" id="2_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://bd643c3dxrsmp" path="res://assets/ferryman.png" id="2_mdl7e"]
 [ext_resource type="Shader" uid="uid://b8vrakaw2oi7u" path="res://scripts/circle.gdshader" id="3_3li8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
-size = Vector2(259.5, 31)
+size = Vector2(166, 40)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mdl7e"]
 shader = ExtResource("3_3li8b")
@@ -126,16 +127,27 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
-size = Vector2(280, 84)
+size = Vector2(103, 35)
+
+[sub_resource type="Gradient" id="Gradient_mdl7e"]
+offsets = PackedFloat32Array(0.383117)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qu4a1"]
+gradient = SubResource("Gradient_mdl7e")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xhfnw")
+
+[node name="Ferryman" type="Sprite2D" parent="."]
+position = Vector2(-9, -7)
+texture = ExtResource("2_mdl7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_kpjcp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.75, -10.5)
+position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_kpjcp")
 
 [node name="sense_circle" type="Area2D" parent="."]
@@ -165,10 +177,15 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(7, 4)
+position = Vector2(-8.5, 25.5)
 shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="sense_timer" type="Timer" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-9, -9)
+scale = Vector2(0.203125, 49)
+texture = SubResource("GradientTexture1D_qu4a1")
 
 [connection signal="body_entered" from="sense_circle" to="." method="_on_sense_circle_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

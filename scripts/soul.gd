@@ -38,7 +38,7 @@ func rise_from_dead() -> void:
 		animation_player.play('evil_rise')
 	else:
 		animation_player.play('rise_up')
-
+	$soul_sound.play()
 	if not attacking:
 		Globals.add_souls(1)
 	else:
