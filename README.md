@@ -30,4 +30,4 @@ It was stable, complete, and delivered what it aimed for. A milestone in finishi
 Download or clone this repo:
 
 ```bash
-git clone https://github.com/yourusername/pixelartjam-from-the-dead.git
+git clone https://github.com/Latamata/pixelartjam-from-the-dead.git
