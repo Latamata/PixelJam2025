@@ -9,7 +9,7 @@ You play a soul risen from the dead, guided only by a mysterious radar. No compl
 
 ### Core Features:
 - ⚙️ **Radar mechanic** to locate hidden or off-screen entities
-- 🎮 Simple click-based movement
+- 🎮 Simple back-fourth movement
 - 📡 Visual feedback for radar range/direction
 - 🔁 A complete gameplay loop
 
