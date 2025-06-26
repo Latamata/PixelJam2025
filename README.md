@@ -17,12 +17,12 @@ You play a soul risen from the dead, guided only by a mysterious radar. No compl
 
 - **Engine**: Godot 4.x  
 - **Art**: Generated using **Sora AI** and hand-edited  
-- **Audio**: Sourced from [name of site, e.g., freesound.org], under [license type, e.g., CC0 or attribution-required]  
+- **Audio**: Sourced from [ freesound.org] 
 - **Time Limit**: [e.g., 10 days]
 
 ## 👤 Solo Developer
 
-- **Developer**: Chance Webber (https://chancewebber.itch.io)
+- **Developer**: Chance Webber https://latamata.itch.io/
 
 ## 📜 Jam Rule Compliance
 
